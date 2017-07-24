@@ -103,14 +103,14 @@ finally:
 # 내장함수
 내장함수는 print, del, type 등과 같이 import하지않고 바로 사용할 수 있는 함수들을 말한다.  
 파이썬의 내장함수들 중 생소한 것 몇가지만 적겠다.  
-1. all
-all(x)은 반복 가능한 자료형 x를 입력인수로 받으며, 이 x가 모두 참이면 True, 거짓이 하나라도 있으면False를 리턴한다.
-2. any
-any(x)는 x중 하나라도 참이 있을경우 True를 리턴하고, x가 모두 거짓일 경우에만  False를 리턴한다.
-3. dir
-dir은 객체가 자체적으로 가지고 있는 변수나 함수를 보여준다. x자료형에 사용할수있는 함수들을 출력한다.  
-4. enumerate
-enumerate는 '열거하다'라는 뜻이다. 순서가 있는 자료형(리스트,튜플,문자열)을 입력으로 받아 인덱스 값을 포함하는 객체를 리턴한다.
+1. all  
+- all(x)은 반복 가능한 자료형 x를 입력인수로 받으며, 이 x가 모두 참이면 True, 거짓이 하나라도 있으면False를 리턴한다.
+2. any  
+- any(x)는 x중 하나라도 참이 있을경우 True를 리턴하고, x가 모두 거짓일 경우에만  False를 리턴한다.
+3. dir  
+- dir은 객체가 자체적으로 가지고 있는 변수나 함수를 보여준다. x자료형에 사용할수있는 함수들을 출력한다.  
+4. enumerate  
+- enumerate는 '열거하다'라는 뜻이다. 순서가 있는 자료형(리스트,튜플,문자열)을 입력으로 받아 인덱스 값을 포함하는 객체를 리턴한다.
 ```
 for i, name in enumerate(['body', 'foo', 'bar']):
 	print(i, name)
@@ -119,17 +119,17 @@ for i, name in enumerate(['body', 'foo', 'bar']):
 >>2 bar
 ```
 위와같이 출력된다.  
-5. id
-id(object)는 객체를 입력받아 객체의 고유 레퍼런스를 리턴하는 함수이다.  
-6. lambda
-lambda는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 한다. 보통 def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 쓰인다.  
+5. id  
+- id(object)는 객체를 입력받아 객체의 고유 레퍼런스를 리턴하는 함수이다.  
+6. lambda  
+- lambda는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 한다. 보통 def를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 쓰인다.  
 `lamda 인수1,인수2,... : 인수를 이용한 표현식` 이와같이 쓰이며 예로는 다름과같다.  
 ```
 sum = lambda a, b: a+b
 >>>sum(3,4)
 >>7
 ```
-lambda는 리스트와같이 def를 사용할 수 없는 곳에서도 사용할 수 있다.  
+- lambda는 리스트와같이 def를 사용할 수 없는 곳에서도 사용할 수 있다.  
 ```
 >>myList = [lambda a,b:a+b, lambda a,b:a*b]
 >>myList
@@ -140,3 +140,48 @@ lambda는 리스트와같이 def를 사용할 수 없는 곳에서도 사용할 
 ~~(굉장히 편해 보인다..)~~  
 
 # 외장함수
+파이썬 라이브러리에 있는 유용한 함수들을 알아보자.  
+1. sys  
+- sys모듈은 파이썬 인터프리터가 제공하는 변수드로가 함수들을 직접 제어할 수 있게 해주는 모듈이다.  
+`sys.exit()` 또는 `sys.path` 등이 있다.  
+2. pickle  
+- pickle은 객체의 형태를 그대로 유지하면서 파일에 저장하고 불러올 수 있게 하는 모듈이다.  
+다음 예는 pickle 모듈의 dump 함수를 이용하여 딕셔너리 객체인 data를 그대로 파일에 저장하는 방법을 보여준다.  
+```
+>>import pickle
+>>f = open("test.txt", 'wb')
+>>data = {1: 'python', 2:'you need'}
+>>pickle.dump(data, f)
+>>f.close()
+```
+다음은 pickle.dump에 의해 저장된 파일을 pickle.load를 이용해서 원래 있던 딕셔너리 객체상태 그대로 불러오는 예이다.  
+```
+>>import pickle
+>>f = open("test.txt", 'rb')
+>>data = pickle.load(f)
+>>print(data)
+{2:'you nedd', 1:'python'}
+```
+딕셔너리 객체 뿐만아니라 어떤 자료형이든 상관없이 저장하고 불러올 수 있다.  
+3. OS  
+- OS모듈은 환경 변수나 디렉토리, 파일 등의 os자원을 제어할 수 있게 해주는 모듈이다.  
+4. shutil  
+- shutil은 파일을 복사해 주는 파이썬 모듈이다.  
+5. glob
+- 특정 디렉토리에 있는 파일 이름 모두를 알아야 할 때 쓰인다.  
+6. tempfile  
+- 파일을 임시로 만들어서 사용할 때 유용하다. `f.close()` 가 호출되면 이 파일객체는 자동으로 사라진다.  
+7. time  
+- time.sleep  
+이 함수의 인수로 실수 형태를 쓸 수 있다. 일정시간 프로그램이 멈추는 효과를 낼 수 있다.  
+8. random  
+- random.random() 은 0.0에서 1.0사이의 실수 중에서 난수값을 리턴한다.  
+- random.randint(x,y) 는 x에서 y 사이의 정수 중에서 난수값을 리턴한다.  
+- random.choice(data) 함수는 입력으로 받은 리스트에서 무작위로 하나를 선택하여 리턴한다.  
+- random.shuffle 은 리스트의 항목을 무작위로 섞고싶을 때 사용한다.  
+9. webbrowser  
+- webbrowser.open("http://google.com") 는 웹브라우저를 자동으로 실행시키고 해당 URL로 이동한다.  
+- webbrowser.open_new("http://google.com") 은 이미 웹 브라우저가 실행된 상태이더라도 새로운 창으로 해당 URL이 열리도록 한다.  
+
+
+
