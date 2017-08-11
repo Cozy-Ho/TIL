@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 from subprocess import call
+from datetime import date, datetime, timedelta
 class Info:
     def __init__(self, army_type, in_date):
         self.army_type = army_type
@@ -10,8 +11,14 @@ class Info:
         print('in_date: ', self.in_date)
 
 def set_info():
-    army_type = raw_input("육군?의경?해군?공군?공익?: ")
-    in_date = raw_input("입대일: ")
+    army_type = input("1.육군 2.의경 3.해군 4.공군 5.공익 : ")
+    date = input("입대일(YYYYMMDD): ")
+    date = list(str(date))
+    year = date[:4]
+    month = date[4:6]
+    day = date[6:]
+    d = datetime.date(year,month,day)
+    in_date = d.days
     info = Info(army_type, in_date)
     return info
 
@@ -24,11 +31,24 @@ def print_menu():
     menu = input('메뉴선택: ')
     return int(menu)
 
+def calc_info(info):
+    now_date = datetime.date.today()
+    if info.army_type == 1 or info.army_type == 2:
+        t_date = now_date - info.in_date
+        print('현재 %s%% 복무 하셨습니다.' %(t_date.days/639*100))
+    elif info.army_type == 3:
+        t_date = now_date - info.in_date
+        print('현재 %s%% 복무 하셨습니다.' %(t_date.days/700*100))
+    elif info.army_type == 4 or info.army_type == 5:
+        t_date =  now_date - info.in_date
+        print('현재 %s%% 복무 하셨습니다.' %(t_date.days/731*100))
+
 def run():
     while 1:
         menu = print_menu()
         if menu == 1:
             info = set_info()
+            calc_info(info)
         elif menu == 2:
             call(['python','main.py'])
         elif menu == 3:
