@@ -12,12 +12,12 @@ class Info:
 
 def set_info():
     army_type = input("1.육군 2.의경 3.해군 4.공군 5.공익 : ")
-    date = input("입대일(YYYYMMDD): ")
-    date = list(str(date))
+    date = raw_input("입대일(YYYYMMDD): ")
+    date = list(date)
     year = date[:4]
     month = date[4:6]
     day = date[6:]
-    d = datetime.date(year,month,day)
+    d = datetime.datetime(year,month,day)
     in_date = d.days
     info = Info(army_type, in_date)
     return info
@@ -42,6 +42,8 @@ def calc_info(info):
     elif info.army_type == 4 or info.army_type == 5:
         t_date =  now_date - info.in_date
         print('현재 %s%% 복무 하셨습니다.' %(t_date.days/731*100))
+    else:
+        print('Index에 있는 숫자를 입력하세요.')
 
 def run():
     while 1:
