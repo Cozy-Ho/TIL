@@ -17,7 +17,7 @@ except Exception as exc:
 
 soup = bs4.BeautifulSoup(res.text)
 
-# select('.r a')는 r 클래스의 모든 a 엘리먼트를 선택하라는 선택자 이다.
+# select('.r a')는 HTML 테그 r 클래스의 모든 a 엘리먼트를 선택하라는 선택자 이다.
 linkElems = soup.select('.r a')
 
 # 검색한 결과중 최소 5개를 브라우저의 탭으로 띄우라는 명령.
